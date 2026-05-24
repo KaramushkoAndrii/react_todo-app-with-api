@@ -52,9 +52,7 @@ export const TodoList: React.FC<Props> = ({
       await onUpdateTodoStatus(todo, { title: trimedTitle });
 
       setEditingTodoId(null);
-    } catch {
-      console.error('Failed to update todo:', error);
-    }
+    } catch (error) {}
   };
 
   const handleEditClick = (todo: Todo) => {
