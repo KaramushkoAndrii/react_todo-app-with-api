@@ -87,22 +87,24 @@ export const TodoList: React.FC<Props> = ({
           </label>
 
           {todo.id === editingTodoId ? (
-            <form onSubmit={event => handleEditSubmit(event, todo)}>
-              <input
-                ref={editFieldRef}
-                type="text"
-                className="todo__edit"
-                data-cy="TodoTitleField"
-                value={editTitle}
-                onChange={e => setEditTitle(e.target.value)}
-                onKeyUp={e => {
-                  if (e.key === 'Escape') {
-                    setEditingTodoId(null);
-                  }
-                }}
-                onBlur={ev => handleEditSubmit(ev, todo)}
-              />
-            </form>
+            <input
+              ref={editFieldRef}
+              type="text"
+              className="todo__title-field"
+              data-cy="TodoTitleField"
+              value={editTitle}
+              onChange={e => setEditTitle(e.target.value)}
+              onKeyUp={e => {
+                if (e.key === 'Escape') {
+                  setEditingTodoId(null);
+                }
+
+                if (e.key === 'Enter') {
+                  handleEditSubmit(e, todo);
+                }
+              }}
+              onBlur={ev => handleEditSubmit(ev, todo)}
+            />
           ) : (
             <>
               <span
